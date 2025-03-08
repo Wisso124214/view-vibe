@@ -13,5 +13,20 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <div style="margin-top: 40px;">
+    <app-cover-slider
+      [title]="'Popular Movies'"
+      [data]="dataCoverSlider1"
+    ></app-cover-slider>
+    
+    <app-cover-slider
+      [title]="'Popular TV Shows'"
+      [data]="dataCoverSlider2"
+    ></app-cover-slider>
+
+    <app-cover-slider
+      [title]="'Most Rated Movies'"
+      [data]="dataCoverSlider3"
+    ></app-cover-slider>
+  </div>
 </ion-content>

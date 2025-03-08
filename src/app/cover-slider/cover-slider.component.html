@@ -1,0 +1,36 @@
+<div style="margin-top: 10px; margin-bottom: 10px;">
+
+  <h1 style="padding-left: 25px; font-weight: bold;"> {{title}} </h1>
+  <swiper-container
+  #swiper
+  [options]="slideOpts"
+  [navigation]="true"
+  (swiper)="swiperReady()"
+  (slidechange)="swiperSlideChanged($event)"
+  >
+    <swiper-slide *ngFor="let total of totalSlides; let i = index">
+      <ion-row>
+        <ion-col style="padding: 0;" size="12" size-xs="6" size-sm="3" size-md="2" size-lg="1.5" *ngFor="let item of selectedSegment; let j = index">
+          <ion-card 
+            (click)="openDetails(segmentList[i*slideOpts.slidesPerView + j].id)"
+            *ngIf="segmentList[i*slideOpts.slidesPerView + j]"
+          >
+            <img [src]="urlPath + segmentList[i*slideOpts.slidesPerView + j].poster_path" fill/>
+            <ion-card-header>
+              <ion-card-title style="font-size: larger; font-weight: bold;"> {{segmentList[i*slideOpts.slidesPerView + j].title}} </ion-card-title>
+              <ion-card-subtitle style="font-size: small;" *ngIf="segmentList[i*slideOpts.slidesPerView + j].title !== segmentList[i*slideOpts.slidesPerView + j].original_title" > {{segmentList[i*slideOpts.slidesPerView + j].original_title}} </ion-card-subtitle>
+            </ion-card-header>
+
+            <ion-card-content>
+              <div style="display: flex; flex-direction: row; justify-content: space-between; width: 90%; justify-self: center;">
+                <p style="font-size: larger;">★ {{segmentList[i*slideOpts.slidesPerView + j].vote_average | number:'1.1-1'}}</p>
+                <p style="font-size: larger;">✰ {{segmentList[i*slideOpts.slidesPerView + j].vote_average | number:'1.1-1'}}</p>
+              </div>
+              <p style="margin-top: 5px">{{segmentList[i*slideOpts.slidesPerView + j].release_date}}</p>
+            </ion-card-content>
+            </ion-card>
+        </ion-col>
+      </ion-row>
+    </swiper-slide>
+  </swiper-container>
+</div>
