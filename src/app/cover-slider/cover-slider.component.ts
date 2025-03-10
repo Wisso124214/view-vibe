@@ -1,6 +1,19 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, Platform, NavController } from '@ionic/angular/standalone';
-import { CommonModule, IMAGE_CONFIG } from '@angular/common';
+import {
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA,
+  ElementRef,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import {
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  Platform,
+} from '@ionic/angular/standalone';
+import { CommonModule } from '@angular/common';
 import Swiper from 'swiper';
 import { Router } from '@angular/router';
 
@@ -19,23 +32,10 @@ import { url_path } from '../../utils/FetchData';
     CommonModule,
     CoverSliderComponent,
   ],
-  providers: [
-    {
-      provide: IMAGE_CONFIG,
-      useValue: {
-        disableImageSizeWarning: true,
-        disableImageLazyLoadWarning: true,
-      },
-    },
-  ],
 })
-
-export class CoverSliderComponent  implements OnInit {
-  constructor(private platform: Platform, private router: Router) {
-    this.adjustSlidesPerView();
-    this.segmentList = [];
-  }
-
+export class CoverSliderComponent implements OnInit {
+  id: number;
+  global: any = globalThis;
   @Input() data?: any;
   @Input() title?: any;
   urlPath: any = url_path;
@@ -54,21 +54,83 @@ export class CoverSliderComponent  implements OnInit {
   @ViewChild('swiper')
   swiperRef: ElementRef | undefined;
   swiper?: Swiper;
+
   pageSelected: any = 0;
   segmentList: Array<any>;
   selectedSegment: any;
   totalSlides: any;
 
+  heightYear: any = 18;
+
+  constructor(private platform: Platform, private router: Router) {
+    this.adjustSlidesPerView();
+    this.segmentList = [];
+
+    if (!this.global.idCoverSlider) {
+      this.global.idCoverSlider = 0;
+    }
+
+    this.id = this.global.idCoverSlider;
+    this.global.idCoverSlider++;
+
+    setTimeout(() => {
+      const element = this.swiperRef?.nativeElement;
+      const cards = element?.getElementsByClassName('cover-card');
+
+      if (cards) {
+        if (!this.global.heightCoverSlider) {
+          this.global.heightCoverSlider = [];
+        }
+
+        for (let c in cards) {
+          const cardHeight = cards[c].offsetHeight + this.heightYear;
+
+          if (cardHeight) {
+            if (!this.global.heightCoverSlider[this.id]) {
+              this.global.heightCoverSlider[this.id] = cardHeight;
+            }
+
+            if (this.global.heightCoverSlider[this.id] < cardHeight) {
+              this.global.heightCoverSlider[this.id] = cardHeight;
+            }
+          }
+        }
+
+        for (let c in cards) {
+          if (this.global.heightCoverSlider[this.id] && cards[c].style) {
+            cards[c].style.height =
+              this.global.heightCoverSlider[this.id] + 'px';
+          }
+        }
+
+        const content_cards = element?.getElementsByClassName('content-cover-card')
+        const image_cards = element?.getElementsByClassName('image-cover-card')
+        const header_cards = element?.getElementsByClassName('header-cover-card')
+        const year_cards = element?.getElementsByClassName('year-card')
+
+
+        for (let c in content_cards) {
+
+          if (content_cards[c].style) {
+            const height_content = (this.global.heightCoverSlider[this.id] - (image_cards[c].offsetHeight + header_cards[c].offsetHeight + this.heightYear + year_cards[c].offsetHeight));
+            content_cards[c].style.height = height_content + 'px';
+          }
+        }
+
+      }
+    }, 0);
+  }
+
   ngOnInit() {
     this.segmentList = this.data;
-    this.initializePage();
+    this.initializeSlider();
     this.platform.resize.subscribe(() => {
       this.adjustSlidesPerView();
-      this.initializePage();
+      this.initializeSlider();
     });
   }
 
-  initializePage() {
+  initializeSlider() {
     this.selectedSegment = Array(this.slideOpts.slidesPerView);
     this.totalSlides = Array(
       Math.ceil(this.segmentList.length / this.slideOpts.slidesPerView)
@@ -90,32 +152,17 @@ export class CoverSliderComponent  implements OnInit {
 
   swiperReady() {
     this.swiper = this.swiperRef?.nativeElement.swiper;
-    console.error('Swiper is ready', this.swiper);
-    alert('Swiper is ready');
   }
 
-  swiperSlideChanged(e: any) {
-    const index = e.target.swiper.activeIndex;
-    console.error('Slide changed to index', index);
-    alert('Slide changed to index ' + index);
-
-    //this.selectedSegment = this.segmentList[index]
-    this.pageSelected = index;
-    this.selectedSegment = this.segmentList.slice(
-      this.pageSelected,
-      this.slideOpts.slidesPerView
-    );
-  }
+  swiperSlideChanged(e: any) {}
 
   _segmentSelected(index: number) {
     this.swiper?.slideTo(index);
-    console.log('index2', index);
-    console.warn('index2 ' + index);
   }
 
   openDetails(id: any) {
-    console.log(id)
+    console.log(id);
 
-    this.router.navigate(['/details-media']);
+    // this.router.navigate(['/details-media']);
   }
 }
