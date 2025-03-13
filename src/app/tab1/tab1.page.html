@@ -1,32 +1,35 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+<div class="ion-page">
+  <ion-header [translucent]="true">
     <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
+      <ion-title>
+        Tab 1
+      </ion-title>
     </ion-toolbar>
   </ion-header>
-
-  <div style="margin-top: 40px;">
-    <app-cover-slider
-      [title]="'Popular Movies'"
-      [data]="dataCoverSlider1"
-    ></app-cover-slider>
+  
+  <ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
+      <ion-toolbar>
+        <ion-title size="large">Tab 1</ion-title>
+      </ion-toolbar>
+    </ion-header>
     
-    <app-cover-slider
-      [title]="'Popular TV Shows'"
-      [data]="dataCoverSlider2"
-    ></app-cover-slider>
-
-    <app-cover-slider
-      [title]="'Most Rated Movies'"
-      [data]="dataCoverSlider3"
-    ></app-cover-slider>
-  </div>
-</ion-content>
+    <div style="margin-top: 40px;">
+      <app-cover-slider
+        [title]="'Popular Movies'"
+        [data]="dataCoverSlider1"
+      ></app-cover-slider>
+      
+      <app-cover-slider
+        [title]="'Popular TV Shows'"
+        [data]="dataCoverSlider2"
+      ></app-cover-slider>
+  
+      <app-cover-slider
+        [title]="'Most Rated Movies'"
+        [data]="dataCoverSlider3"
+      ></app-cover-slider>
+    </div>
+    
+  </ion-content>  
+</div>

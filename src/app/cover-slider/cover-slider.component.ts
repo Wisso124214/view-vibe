@@ -60,8 +60,6 @@ export class CoverSliderComponent implements OnInit {
   selectedSegment: any;
   totalSlides: any;
 
-  heightYear: any = 18;
-
   constructor(private platform: Platform, private router: Router) {
     this.adjustSlidesPerView();
     this.segmentList = [];
@@ -83,7 +81,7 @@ export class CoverSliderComponent implements OnInit {
         }
 
         for (let c in cards) {
-          const cardHeight = cards[c].offsetHeight + this.heightYear;
+          const cardHeight = cards[c].offsetHeight + element?.getElementsByClassName('year-card')[0].offsetHeight*1;
 
           if (cardHeight) {
             if (!this.global.heightCoverSlider[this.id]) {
@@ -105,16 +103,15 @@ export class CoverSliderComponent implements OnInit {
 
         const content_cards = element?.getElementsByClassName('content-cover-card')
         const image_cards = element?.getElementsByClassName('image-cover-card')
-        const header_cards = element?.getElementsByClassName('header-cover-card')
-        const year_cards = element?.getElementsByClassName('year-card')
 
 
         for (let c in content_cards) {
 
           if (content_cards[c].style) {
-            const height_content = (this.global.heightCoverSlider[this.id] - (image_cards[c].offsetHeight + header_cards[c].offsetHeight + this.heightYear + year_cards[c].offsetHeight));
+            const height_content = (this.global.heightCoverSlider[this.id] - (image_cards[c].offsetHeight));
             content_cards[c].style.height = height_content + 'px';
           }
+          
         }
 
       }

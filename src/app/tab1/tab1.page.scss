@@ -1,0 +1,11 @@
+.ion-page {
+  background: url('../../assets/bg/popcorn-black.png') center/cover;
+  background-repeat: repeat;
+  background-size: 300px 300px;
+  background-color: white;
+}
+
+ion-content {
+  --background: transparent;
+  backdrop-filter: blur(1.5px);
+}

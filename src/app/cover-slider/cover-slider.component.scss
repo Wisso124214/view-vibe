@@ -1,0 +1,52 @@
+.image-cover-card {
+  padding: 5px;
+  border-radius: 20px;
+}
+
+.content-cover-card {
+  display: flex;
+  flex-direction: column;
+  // justify-content: center;
+  border-radius: 20px;
+  background-color: rgba(100, 0, 0, 1);
+  padding-bottom: 25px;
+}
+
+.rating {
+  display: flex;
+  align-self: center;
+  flex-direction: row;
+  padding-top: 10px;
+  justify-content: space-between;
+  width: 85%;
+}
+
+.year-card {
+  position: absolute;
+  bottom: 10px;
+  left: 20px;
+}
+
+h1 {
+  color: white;
+  background-color: rgba(110, 0, 0, .9);
+  padding: 12px;
+  margin-bottom: 5px;
+  margin-top: 30px;
+  border-top: 4px solid yellow;
+  border-bottom: 4px solid yellow;
+}
+
+ion-card {
+  box-shadow: 1px 1px 15px black;
+  border-radius: 20px;
+
+  background-color: rgba(60, 0, 0, 1);
+}
+
+swiper-container {
+  --swiper-navigation-color: yellow;
+  --swiper-navigation-size: 30px;
+  --swiper-navigation-sides-offset: 25px;
+  --swiper-navigation-top-offset: 50%;
+}

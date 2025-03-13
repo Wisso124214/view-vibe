@@ -1,4 +1,4 @@
-<div style="margin-top: 10px; margin-bottom: 10px;">
+<div class="cover-slider" style="margin-top: 10px; margin-bottom: 10px;">
 
   <h1 style="padding-left: 25px; font-weight: bold;"> {{title}} </h1>
   <swiper-container
@@ -20,21 +20,19 @@
             *ngIf="segmentList[i*slideOpts.slidesPerView + j]"
           >
             <img class="image-cover-card" [src]="urlPath + segmentList[i*slideOpts.slidesPerView + j].poster_path"/>
-            <ion-card-header class="header-cover-card">
-              <ion-card-title style="font-size: larger; font-weight: bold;"> {{segmentList[i*slideOpts.slidesPerView + j].title}} </ion-card-title>
-              <ion-card-subtitle style="font-size: small;" *ngIf="segmentList[i*slideOpts.slidesPerView + j].title !== segmentList[i*slideOpts.slidesPerView + j].original_title" > {{segmentList[i*slideOpts.slidesPerView + j].original_title}} </ion-card-subtitle>
-            </ion-card-header>
 
-            <ion-card-content class="content-cover-card" style="display: flex; flex-direction: column; justify-content: center; ">
-              <div style="display: flex; flex-direction: row; justify-content: space-between; width: 85%; align-self: center;">
+            <ion-card-content class="content-cover-card">
+              <p style="font-size: larger; font-weight: bold; color: white;"> {{segmentList[i*slideOpts.slidesPerView + j].title}} </p>
+              <p style="font-size: small;" *ngIf="segmentList[i*slideOpts.slidesPerView + j].title !== segmentList[i*slideOpts.slidesPerView + j].original_title" > {{segmentList[i*slideOpts.slidesPerView + j].original_title}} </p>
+              <div class="rating">
                 <p style="font-size: larger;">★ {{segmentList[i*slideOpts.slidesPerView + j].vote_average | number:'1.1-1'}}</p>
                 <p style="font-size: larger;">✰ {{segmentList[i*slideOpts.slidesPerView + j].vote_average | number:'1.1-1'}}</p>
               </div>
               <!-- <p style="margin-top: 20px; font-size: small; text-align: justify;">
                 {{segmentList[i*slideOpts.slidesPerView + j].overview}}
               </p> -->
+              <p class="year-card">{{segmentList[i*slideOpts.slidesPerView + j].release_date.split('-')[0]}}</p>
             </ion-card-content>
-            <p class="year-card" style="position: absolute; bottom: 0px; left: 20px;">{{segmentList[i*slideOpts.slidesPerView + j].release_date.split('-')[0]}}</p>
           </ion-card>
         </ion-col>
       </ion-row>
