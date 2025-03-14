@@ -15,23 +15,22 @@
           <ion-card 
             class="cover-card"
             style="width: 90%;"
-            [routerLink]="['/details', segmentList[i*slideOpts.slidesPerView + j].id]"
             (click)="openDetails(segmentList[i*slideOpts.slidesPerView + j].id)"
             *ngIf="segmentList[i*slideOpts.slidesPerView + j]"
           >
             <img class="image-cover-card" [src]="urlPath + segmentList[i*slideOpts.slidesPerView + j].poster_path"/>
 
             <ion-card-content class="content-cover-card">
-              <p style="font-size: larger; font-weight: bold; color: white;"> {{segmentList[i*slideOpts.slidesPerView + j].title}} </p>
-              <p style="font-size: small;" *ngIf="segmentList[i*slideOpts.slidesPerView + j].title !== segmentList[i*slideOpts.slidesPerView + j].original_title" > {{segmentList[i*slideOpts.slidesPerView + j].original_title}} </p>
+              <p class="title"> {{segmentList[i*slideOpts.slidesPerView + j].title}} </p>
+              <p class="subtitle" *ngIf="segmentList[i*slideOpts.slidesPerView + j].title !== segmentList[i*slideOpts.slidesPerView + j].original_title" > {{segmentList[i*slideOpts.slidesPerView + j].original_title}} </p>
               <div class="rating">
-                <p style="font-size: larger;">★ {{segmentList[i*slideOpts.slidesPerView + j].vote_average | number:'1.1-1'}}</p>
-                <p style="font-size: larger;">✰ {{segmentList[i*slideOpts.slidesPerView + j].vote_average | number:'1.1-1'}}</p>
+                <p class="small-text">★ {{segmentList[i*slideOpts.slidesPerView + j].vote_average | number:'1.1-1'}}</p>
+                <p class="small-text">✰ {{segmentList[i*slideOpts.slidesPerView + j].vote_average | number:'1.1-1'}}</p>
               </div>
               <!-- <p style="margin-top: 20px; font-size: small; text-align: justify;">
                 {{segmentList[i*slideOpts.slidesPerView + j].overview}}
               </p> -->
-              <p class="year-card">{{segmentList[i*slideOpts.slidesPerView + j].release_date.split('-')[0]}}</p>
+              <p class="year-card small-text">{{segmentList[i*slideOpts.slidesPerView + j].release_date.split('-')[0]}}</p>
             </ion-card-content>
           </ion-card>
         </ion-col>

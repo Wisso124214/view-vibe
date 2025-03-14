@@ -1,3 +1,17 @@
+@use 'src/global.scss' as g;
+@use 'sass:color';
+
+$text-color-tertiary: null;
+$box-shadow-color: null;
+
+@if g.$dark-theme {
+  $text-color-tertiary: color.adjust(g.$text-color-secondary, $lightness: 12%);
+  $box-shadow-color: color.adjust(g.$bg-color, $lightness: -100%);
+} @else {
+  $text-color-tertiary: color.adjust(g.$text-color-secondary, $lightness: -12%);
+  $box-shadow-color: color.adjust(g.$bg-color, $lightness: -100%);
+}
+
 .image-cover-card {
   padding: 5px;
   border-radius: 20px;
@@ -6,10 +20,10 @@
 .content-cover-card {
   display: flex;
   flex-direction: column;
-  // justify-content: center;
+  justify-content: center;
   border-radius: 20px;
-  background-color: rgba(100, 0, 0, 1);
-  padding-bottom: 25px;
+  background-color: g.$bg-card;
+  padding-bottom: 30px;
 }
 
 .rating {
@@ -28,25 +42,39 @@
 }
 
 h1 {
-  color: white;
-  background-color: rgba(110, 0, 0, .9);
+  color: g.$text-color;
+  background-color: g.$bg-title;
   padding: 12px;
   margin-bottom: 5px;
   margin-top: 30px;
-  border-top: 4px solid yellow;
-  border-bottom: 4px solid yellow;
+  border-top: 4px solid g.$details-color;
+  border-bottom: 4px solid g.$details-color;
 }
 
 ion-card {
-  box-shadow: 1px 1px 15px black;
+  box-shadow: 1px 1px 15px $box-shadow-color;
   border-radius: 20px;
-
-  background-color: rgba(60, 0, 0, 1);
+  background-color: g.$bg-card-image;
 }
 
 swiper-container {
-  --swiper-navigation-color: yellow;
+  --swiper-navigation-color: #{g.$details-color};
   --swiper-navigation-size: 30px;
   --swiper-navigation-sides-offset: 25px;
   --swiper-navigation-top-offset: 50%;
+}
+
+.small-text {
+  color: g.$text-color-secondary;
+}
+
+.subtitle {
+  font-size: small;
+  color: $text-color-tertiary;
+}
+
+.title {
+  font-size: larger;
+  font-weight: bold;
+  color: g.$text-color;
 }

@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 /*
  * App Global CSS
  * ----------------------------------------------------------------------------
@@ -35,3 +37,43 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+/* Theme variables */
+
+// $dark-theme: true;
+// $bg-color: rgba(100, 0, 0, 1);
+// $text-color: white;
+// $bg-title: rgba(255, 255, 255, .7);
+// $bg-card: rgba(20, 20, 20, 1);
+// $details-color: yellow;
+
+
+
+// $dark-theme: true;
+// $bg-color: rgba(100, 0, 0, 1);
+// $text-color: white;
+// $bg-card: rgba(20, 20, 20, 1);
+// $details-color: #0099ff;
+
+
+$dark-theme: false;
+$bg-color: rgba(180, 0, 0, 1);
+$text-color: black;
+$bg-card: rgba(225, 225, 225, .9);
+$details-color: #003c80;
+
+
+$bg-card-image: null;
+$bg-url: null;
+$text-color-secondary: null;
+$bg-title: color.adjust($bg-card, $alpha: -.15);
+
+@if $dark-theme {
+  $text-color-secondary: color.adjust($text-color, $lightness: 12%);
+  $bg-card-image: color.adjust($bg-card, $lightness: 8%);
+  $bg-url: url('./assets/bg/popcorn-white.png');
+} @else {
+  $text-color-secondary: color.adjust($text-color, $lightness: -12%);
+  $bg-card-image: color.adjust($bg-card, $lightness: -8%);
+  $bg-url: url('./assets/bg/popcorn-black.png');
+}

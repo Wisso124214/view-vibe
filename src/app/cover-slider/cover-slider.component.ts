@@ -70,7 +70,9 @@ export class CoverSliderComponent implements OnInit {
 
     this.id = this.global.idCoverSlider;
     this.global.idCoverSlider++;
+  }
 
+  fullHeight() {
     setTimeout(() => {
       const element = this.swiperRef?.nativeElement;
       const cards = element?.getElementsByClassName('cover-card');
@@ -78,10 +80,25 @@ export class CoverSliderComponent implements OnInit {
       if (cards) {
         if (!this.global.heightCoverSlider) {
           this.global.heightCoverSlider = [];
+        } else {
+          if (this.global.heightCoverSlider[this.id]) {
+            this.global.heightCoverSlider[this.id] = 0;
+          }
         }
 
+        const content_cards = element?.getElementsByClassName('content-cover-card')
+        const image_cards = element?.getElementsByClassName('image-cover-card')
+
         for (let c in cards) {
-          const cardHeight = cards[c].offsetHeight + element?.getElementsByClassName('year-card')[0].offsetHeight*1;
+          let cardContentHeight = 0;
+
+          for (let cc in content_cards[c].childNodes) {
+            if (content_cards[c].childNodes[cc].style) {
+              cardContentHeight += content_cards[c].childNodes[cc].offsetHeight;
+            }
+          }
+
+          const cardHeight = image_cards[c].offsetHeight + cardContentHeight + element?.getElementsByClassName('year-card')[0].offsetHeight*1.5;
 
           if (cardHeight) {
             if (!this.global.heightCoverSlider[this.id]) {
@@ -101,19 +118,12 @@ export class CoverSliderComponent implements OnInit {
           }
         }
 
-        const content_cards = element?.getElementsByClassName('content-cover-card')
-        const image_cards = element?.getElementsByClassName('image-cover-card')
-
-
         for (let c in content_cards) {
-
           if (content_cards[c].style) {
             const height_content = (this.global.heightCoverSlider[this.id] - (image_cards[c].offsetHeight));
             content_cards[c].style.height = height_content + 'px';
           }
-          
         }
-
       }
     }, 0);
   }
@@ -125,6 +135,8 @@ export class CoverSliderComponent implements OnInit {
       this.adjustSlidesPerView();
       this.initializeSlider();
     });
+
+    this.fullHeight();
   }
 
   initializeSlider() {
@@ -145,6 +157,8 @@ export class CoverSliderComponent implements OnInit {
     } else {
       this.slideOpts.slidesPerView = 8;
     }
+
+    this.fullHeight();
   }
 
   swiperReady() {
