@@ -18,11 +18,11 @@
             (click)="openDetails(segmentList[i*slideOpts.slidesPerView + j].id)"
             *ngIf="segmentList[i*slideOpts.slidesPerView + j]"
           >
-            <img class="image-cover-card" [src]="urlPath + segmentList[i*slideOpts.slidesPerView + j].poster_path"/>
+            <img class="image-cover-card" [src]="pathImages + segmentList[i*slideOpts.slidesPerView + j].poster_path"/>
 
             <ion-card-content class="content-cover-card">
               <p class="title"> {{segmentList[i*slideOpts.slidesPerView + j].title}} </p>
-              <p class="subtitle" *ngIf="segmentList[i*slideOpts.slidesPerView + j].title !== segmentList[i*slideOpts.slidesPerView + j].original_title" > {{segmentList[i*slideOpts.slidesPerView + j].original_title}} </p>
+              <!-- <p class="subtitle" *ngIf="segmentList[i*slideOpts.slidesPerView + j].title !== segmentList[i*slideOpts.slidesPerView + j].original_title" > {{segmentList[i*slideOpts.slidesPerView + j].original_title}} </p> -->
               <div class="rating">
                 <p class="small-text">★ {{segmentList[i*slideOpts.slidesPerView + j].vote_average | number:'1.1-1'}}</p>
                 <p class="small-text">✰ {{segmentList[i*slideOpts.slidesPerView + j].vote_average | number:'1.1-1'}}</p>

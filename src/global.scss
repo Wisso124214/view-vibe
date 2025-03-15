@@ -34,10 +34,13 @@
  * https://ionicframework.com/docs/theming/dark-mode
  */
 
-/* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
-
+ /* @import "@ionic/angular/css/palettes/dark.always.css"; */
+ /* @import "@ionic/angular/css/palettes/dark.class.css"; */
+ @import '@ionic/angular/css/palettes/dark.system.css';
+ 
+ @import url('https://fonts.googleapis.com/css2?family=Domine:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Domine:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&display=swap');
+ 
 /* Theme variables */
 
 // $dark-theme: true;
@@ -48,32 +51,72 @@
 // $details-color: yellow;
 
 
-
-// $dark-theme: true;
-// $bg-color: rgba(100, 0, 0, 1);
-// $text-color: white;
-// $bg-card: rgba(20, 20, 20, 1);
-// $details-color: #0099ff;
-
+//IMPORT DARK THEME
 
 $dark-theme: false;
-$bg-color: rgba(180, 0, 0, 1);
-$text-color: black;
-$bg-card: rgba(225, 225, 225, .9);
-$details-color: #003c80;
 
-
+$bg-color: null;
+$text-color: null;
+$bg-card: null;
+$details-color: null;
+$no-text-color: null;
 $bg-card-image: null;
 $bg-url: null;
+$bg-title: null;
 $text-color-secondary: null;
-$bg-title: color.adjust($bg-card, $alpha: -.15);
+$no-bg-title: null;
+$no-details-color: null;
+
+$font: 'Outfit', 'Montserrat', 'Verdana';
 
 @if $dark-theme {
+  //changeable
+  $bg-color: rgba(100, 0, 0, 1);
+  $text-color: white;
+  $bg-card: rgba(20, 20, 20, 1);
+  $details-color: #0099ff;
+  $no-details-color: #003c80;
+
+  //constant
+  $bg-title: color.adjust($bg-card, $alpha: -.15);
+  
+  //derived
+  $no-bg-title: color.adjust($bg-title, $lightness: 80%, $alpha: -.15);
   $text-color-secondary: color.adjust($text-color, $lightness: 12%);
   $bg-card-image: color.adjust($bg-card, $lightness: 8%);
   $bg-url: url('./assets/bg/popcorn-white.png');
+  $no-text-color: color.adjust($text-color, $lightness: -100%);
+  
 } @else {
+  //changeable
+  $bg-color: rgba(180, 0, 0, 1);
+  $text-color: black;
+  $bg-card: rgba(225, 225, 225, .9);
+  $details-color: #003c80;
+  $no-details-color: #0099ff;
+  
+  //constant
+  $bg-title: color.adjust($bg-card, $alpha: -.15);
+  
+  //derived
+  $no-bg-title: color.adjust($bg-title, $lightness: -83%);
   $text-color-secondary: color.adjust($text-color, $lightness: -12%);
   $bg-card-image: color.adjust($bg-card, $lightness: -8%);
   $bg-url: url('./assets/bg/popcorn-black.png');
+  $no-text-color: color.adjust($text-color, $lightness: 100%);
+}
+
+
+.ion-page {
+  background: $bg-url center/cover;
+  background-repeat: repeat;
+  background-size: 300px 300px;
+  background-color: $bg-color;
+  z-index: 0;
+}
+
+ion-content {
+  --background: transparent;
+  backdrop-filter: blur(1.5px);
+  z-index: 0;
 }

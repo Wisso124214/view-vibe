@@ -1,0 +1,6 @@
+
+ cover-slider.component:
+      - Set ★✰ as icons and a little bit larger (with percent and min px)
+      - Set --swiper-navigation-top-offset to image height on .ts
+
+✔✔ Fix background of app (set on the correct place to configure it once and it show in entire pages app)

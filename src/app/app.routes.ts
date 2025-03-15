@@ -4,7 +4,7 @@ import { routes as tabsRoutes } from './tabs/tabs.routes';
 export const routes: Routes = [
   ...tabsRoutes,
   {
-    path: 'details-media',
+    path: 'details-media/:id',
     loadComponent: () => import('./details-media/details-media.page').then( m => m.DetailsMediaPage)
   },
   {

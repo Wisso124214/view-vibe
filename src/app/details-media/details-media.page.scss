@@ -1,0 +1,304 @@
+@use 'src/global.scss' as g;
+@use 'sass:color';
+
+$blur: 5px;
+
+.ion-page {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+}
+
+ion-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  background-color: transparent;
+}
+
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: min(1200px, 100%);
+  justify-self: center;
+  background-color: g.$no-bg-title;
+  padding-bottom: 10%;
+  // background: transparent;
+}
+
+.details {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.content-right {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+}
+
+.content-right > * {
+  margin: 0;
+  margin-top: 10%;
+}
+  
+
+.sidebar-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 25%;
+  height: 1000px;
+  background-color: g.$bg-title;
+}
+
+@media (max-width: 800px) {
+  .sidebar-left {
+    display: none;
+  }
+
+  .content-right {
+    width: 80%;
+  }
+}
+
+.backdrop {
+  position: relative;
+  top: 0;
+  width: 100%;
+  height: min-content;
+}
+
+.bd-img {
+  width: 100%;
+  // border-radius: 30px;
+}
+
+.bd-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  height: max(90px, 40%);
+  position: absolute;
+  bottom: 10%;
+  left: 5%;
+}
+
+.buy-button {
+  position: absolute;
+  bottom: 10%;
+  right: 5%;
+  background-color: g.$details-color;
+  border-radius: 3vw;
+  padding: 0 1vw;
+  font-family: g.$font;
+  font-size: 1vw;
+  border: max(.4vw, 3px) solid g.$bg-title;
+  color: g.$no-text-color;
+}
+
+.poster-img {
+  height: 100%;
+  margin-right: 10px;
+  border: max(.4vw, 3px) solid g.$bg-title;
+  backdrop-filter: blur($blur);
+  border-radius: 10px;
+}
+
+.bd-runtime {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0;
+}
+
+.bd-runtime > * {
+  margin: 0;
+}
+
+.bd-text {
+  display: flex;
+  flex-direction: column;
+  background-color: g.$bg-title;
+  padding: max(min(2vw, 20px), 10px) max(min(4vw, 40px), 20px);
+  border-radius: 10px;
+  color: g.$text-color;
+  font-size: max(min(1.5vw, 18px), 10px);
+  height: min-content;
+  align-self: flex-end;
+  font-family: g.$font;
+  backdrop-filter: blur($blur);
+  max-width: 550px;
+}
+
+.bd-subtitle {
+  font-style: italic;
+}
+
+@media (max-width: 280px) {
+  .bd-text {
+    display: none;
+  }
+}
+
+.bd-text > * {
+  margin: 0;
+  margin-top: max(min(1vw, 10px), 5px);
+}
+
+.bd-flex-genres {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.bd-flex-genre {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+}
+
+.bd-genre {
+  margin: 0;
+}
+
+.bd-genre-comma {
+  margin: 0;
+  margin-right: 10px;
+}
+
+.bd-title {
+  font-size: max(2vw, 12px);
+  top: 0;
+  margin: 0;
+  font-weight: bold;
+}
+
+.button-back {
+  position: absolute;
+  display: flex;
+  top: 20px;
+  left: 20px;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 100%;
+  padding: 5px;
+  width: 50px;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-back ion-icon {
+  color: white;
+  font-size: 25px;
+}
+
+.button-back:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.button-back:active {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+ion-button {
+  --background: g.$details-color;
+  --color: white;
+  --border-radius: 20px;
+  --box-shadow: 1px 1px 15px $box-shadow-color;
+  --width: 50px;
+  --height: 50px;
+}
+
+.card-rating {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  background-color: g.$bg-title;
+  padding: 3vw 5vw;
+
+  border-radius: 2vw;
+  width: 100%;
+  height: min-content;
+}
+
+.card-rating .left-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 3vw;
+}
+
+.card-rating .left-col .rating {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: g.$details-color;
+}
+
+.card-rating .left-col .rating > * {
+  margin: auto 1.5vw;
+}
+
+.card-rating .left-col .rating ion-icon {
+  font-size: 5vw;
+  margin-bottom: 1vw;
+}
+
+.card-rating .left-col .rating p {
+  font-size: min(2.5vw, 30px);
+  font-weight: bold;
+  font-family: g.$font;
+}
+
+.card-rating .overview {
+  font-family: g.$font;
+  text-align: justify;
+  font-size: min(2vw, 20px);
+  color: g.$text-color;
+}
+
+
+.cast .title {
+  font-size: max(2vw, 12px);
+  font-weight: bold;
+  margin: 0;
+  font-family: g.$font;
+}
+
+.flex-cast {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 0;
+  // overflow-x: auto;
+  // overflow-y: hidden;
+  // overflow-y: auto;
+  // overflow-x: hidden;
+  overflow: auto;
+
+  max-height: max(165px, 19vw);
+  white-space: nowrap;
+}
+
+.card-cast {
+  height: max(150px, 18vw);
+  width: max(100px, 12vw);
+  background-color: g.$bg-title;
+  border-radius: 1vw;
+  margin: 1vw;
+}

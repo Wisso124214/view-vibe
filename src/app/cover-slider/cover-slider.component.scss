@@ -43,6 +43,7 @@ $box-shadow-color: null;
 
 h1 {
   color: g.$text-color;
+  font-family: g.$font;
   background-color: g.$bg-title;
   padding: 12px;
   margin-bottom: 5px;
@@ -66,6 +67,7 @@ swiper-container {
 
 .small-text {
   color: g.$text-color-secondary;
+  font-family: g.$font;
 }
 
 .subtitle {
@@ -77,4 +79,5 @@ swiper-container {
   font-size: larger;
   font-weight: bold;
   color: g.$text-color;
+  font-family: g.$font;
 }

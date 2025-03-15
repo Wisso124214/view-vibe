@@ -15,9 +15,9 @@ import {
 } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import Swiper from 'swiper';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 
-import { url_path } from '../../utils/FetchData';
+import { path_images_500 } from '../../utils/FetchData';
 
 @Component({
   selector: 'app-cover-slider',
@@ -31,6 +31,7 @@ import { url_path } from '../../utils/FetchData';
     IonContent,
     CommonModule,
     CoverSliderComponent,
+    RouterOutlet,
   ],
 })
 export class CoverSliderComponent implements OnInit {
@@ -38,7 +39,7 @@ export class CoverSliderComponent implements OnInit {
   global: any = globalThis;
   @Input() data?: any;
   @Input() title?: any;
-  urlPath: any = url_path;
+  pathImages: any = path_images_500;
   slideOpts: any = {
     slidesPerView: 2,
     freeMode: false,
@@ -139,6 +140,12 @@ export class CoverSliderComponent implements OnInit {
     this.fullHeight();
   }
 
+  IonViewDidEnter() {
+    console.log('ionViewDidEnter');
+
+    this.fullHeight();
+  }
+
   initializeSlider() {
     this.selectedSegment = Array(this.slideOpts.slidesPerView);
     this.totalSlides = Array(
@@ -172,8 +179,6 @@ export class CoverSliderComponent implements OnInit {
   }
 
   openDetails(id: any) {
-    console.log(id);
-
-    // this.router.navigate(['/details-media']);
+    this.router.navigate(['/details-media', id]);
   }
 }
