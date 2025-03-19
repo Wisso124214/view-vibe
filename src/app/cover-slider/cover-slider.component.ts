@@ -15,7 +15,7 @@ import {
 } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import Swiper from 'swiper';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet, ActivatedRoute } from '@angular/router';
 
 import { path_images_500 } from '../../utils/FetchData';
 
@@ -61,7 +61,7 @@ export class CoverSliderComponent implements OnInit {
   selectedSegment: any;
   totalSlides: any;
 
-  constructor(private platform: Platform, private router: Router) {
+  constructor(private platform: Platform, private router: Router, private routerActive:ActivatedRoute) {
     this.adjustSlidesPerView();
     this.segmentList = [];
 
@@ -130,19 +130,24 @@ export class CoverSliderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.segmentList = this.data;
-    this.initializeSlider();
-    this.platform.resize.subscribe(() => {
-      this.adjustSlidesPerView();
-      this.initializeSlider();
-    });
 
-    this.fullHeight();
+    console.log('in')
+    this.routerActive.paramMap.subscribe(paramMap => {
+      if (this.router.url === "/tabs/movies") {
+        console.log('route: ', this.router.url)
+        this.segmentList = this.data;
+        
+        this.resize();
+        this.platform.resize.subscribe(() => {
+          this.resize();
+        });
+      }
+    })
   }
 
-  IonViewDidEnter() {
-    console.log('ionViewDidEnter');
-
+  resize() {
+    this.initializeSlider();
+    this.adjustSlidesPerView();
     this.fullHeight();
   }
 
@@ -172,7 +177,9 @@ export class CoverSliderComponent implements OnInit {
     this.swiper = this.swiperRef?.nativeElement.swiper;
   }
 
-  swiperSlideChanged(e: any) {}
+  swiperSlideChanged(e: any) {
+    console.log('swiperSlideChanged', e);
+  }
 
   _segmentSelected(index: number) {
     this.swiper?.slideTo(index);

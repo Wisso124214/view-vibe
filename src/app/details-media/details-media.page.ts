@@ -50,7 +50,8 @@ export class DetailsMediaPage implements OnInit {
   };
   runtimeHours: any;
   runtimeMinutes: any;
-  
+  enableBack: any = false;
+
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
     
@@ -60,7 +61,7 @@ export class DetailsMediaPage implements OnInit {
         this.media = data;
         this.runtimeHours = Math.floor(this.media.runtime / 60);
         this.runtimeMinutes = this.media.runtime % 60;
-
+        this.enableBack = true;
         // this.heightImage = document?.getElementsByClassName('backdrop');
         // console.log(this.heightImage)
       })
@@ -149,7 +150,12 @@ export class DetailsMediaPage implements OnInit {
   }
 
   goBack() {
-    this.global.history.back();
+    if (this.enableBack) {
+      this.global.history.back();
+    } else {
+      console.log('loading')
+      setTimeout(() => this.goBack(), 100);
+    }
   }
 
   openHomepage(link: any) {

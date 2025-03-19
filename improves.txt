@@ -1,6 +1,11 @@
 
- cover-slider.component:
-      - Set ★✰ as icons and a little bit larger (with percent and min px)
-      - Set --swiper-navigation-top-offset to image height on .ts
+  cover-slider.component:
+    - Set ★✰ as icons and a little bit larger (with percent and min px)
+    - Set --swiper-navigation-top-offset to image height on .ts
+    - Customize arrows cover-slider
+    - Disengage slider (swiper) on cover, pass the child node (to use it as cast, cover, comment, review...)
 
 ✔✔ Fix background of app (set on the correct place to configure it once and it show in entire pages app)
+✔✔ Fix font size mobile
+✔✔ bd-content responsive
+

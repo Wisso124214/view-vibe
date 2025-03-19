@@ -40,15 +40,27 @@
         </div>
 
         <ion-button class="buy-button" fill="clear" (click)="openHomepage(media.homepage)">
-          <ion-icon name="ticket" style="margin-right: .8vw;"></ion-icon>
-          <p class="text">Buy Tickets</p>
+          <ion-icon name="ticket"></ion-icon>
+          <div class="text"><p class="buy">Buy</p><p class="tickets">&nbsp;Tickets</p></div>
         </ion-button>
       </div>
       
       <div class="details">
         <div class="content-right">
+          <div class="bd-content-mobile">
+            <img class="poster-img" [src]="pathImg500 + media.poster_path" />
+            <div class="bd-text">
+              <p class="bd-title">{{media.title}}</p>
+              <p class="bd-subtitle">{{media.original_title}}</p>
+              <div class="bd-runtime"><p *ngIf="runtimeHours > 0">{{runtimeHours}}h &nbsp;</p><p *ngIf="runtimeMinutes > 9">{{runtimeMinutes}}m</p><p *ngIf="runtimeMinutes < 10 && runtimeMinutes > 0">0{{runtimeMinutes}}m</p></div>
+              <div class="bd-flex-genres">
+                <div class="bd-flex-genre" *ngFor="let genre of media.genres; let g = index"><p class="bd-genre">{{genre.name}}</p><p class="bd-genre-comma" *ngIf="g < media.genres.length - 1">,</p></div>
+              </div>
+            </div>
+          </div>
+
           <div class="card-rating">
-            <div class="left-col">
+            <div class="container-rating">
               <div class="rating">
                 <ion-icon name="star"></ion-icon>
                 <p class="rating-number">{{media.vote_average | number:'1.1-1'}}</p>

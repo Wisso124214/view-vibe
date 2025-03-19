@@ -59,8 +59,8 @@ ion-card {
 }
 
 swiper-container {
-  --swiper-navigation-color: #{g.$details-color};
-  --swiper-navigation-size: 30px;
+  --swiper-navigation-color: #{g.$bg-color};
+  --swiper-navigation-size: 40px;
   --swiper-navigation-sides-offset: 25px;
   --swiper-navigation-top-offset: 50%;
 }

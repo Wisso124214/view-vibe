@@ -71,6 +71,36 @@ ion-content {
   }
 }
 
+.buy-button {
+  position: absolute;
+  bottom: 10%;
+  right: 5%;
+  background-color: g.$details-color;
+  border-radius: max(3vw, 30px);
+  padding: 0 max(1vw, 6px);
+  font-family: g.$font;
+  font-size: max(1vw, 10px);
+  border: max(.4vw, 4px) solid g.$bg-title;
+  color: g.$no-text-color;
+  height: max(min(6vw, 75px), 40px);
+}
+
+.buy-button ion-icon {
+  margin-right: max(.8vw, 8px);
+}
+
+.buy-button .text {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+@media (max-width: 300px) {
+  .buy-button .text .tickets {
+    display: none;
+  }
+}
+
 .backdrop {
   position: relative;
   top: 0;
@@ -83,7 +113,7 @@ ion-content {
   // border-radius: 30px;
 }
 
-.bd-content {
+.bd-content, .bd-content-mobile {
   display: flex;
   flex-direction: row;
   justify-content: left;
@@ -93,25 +123,23 @@ ion-content {
   left: 5%;
 }
 
-.buy-button {
-  position: absolute;
-  bottom: 10%;
-  right: 5%;
-  background-color: g.$details-color;
-  border-radius: 3vw;
-  padding: 0 1vw;
-  font-family: g.$font;
-  font-size: 1vw;
-  border: max(.4vw, 3px) solid g.$bg-title;
-  color: g.$no-text-color;
+.bd-content-mobile {
+  position: relative;
+  top: 0;
+  left: 0;
 }
 
 .poster-img {
   height: 100%;
   margin-right: 10px;
-  border: max(.4vw, 3px) solid g.$bg-title;
+  border: max(.4vw, 4px) solid g.$bg-title;
   backdrop-filter: blur($blur);
-  border-radius: 10px;
+  border-radius: max(2vw, 15px);
+}
+
+.bd-content-mobile .poster-img {
+  border: max(.5vw, 5px) solid g.$bg-title;
+  width: 100%;
 }
 
 .bd-runtime {
@@ -129,23 +157,73 @@ ion-content {
   display: flex;
   flex-direction: column;
   background-color: g.$bg-title;
-  padding: max(min(2vw, 20px), 10px) max(min(4vw, 40px), 20px);
-  border-radius: 10px;
+  padding: max(min(2vw, 20px), 15px) max(min(4vw, 40px), 20px);
+  border-radius: max(2vw, 15px);
   color: g.$text-color;
   font-size: max(min(1.5vw, 18px), 10px);
-  height: min-content;
   align-self: flex-end;
   font-family: g.$font;
   backdrop-filter: blur($blur);
   max-width: 550px;
 }
 
+.bd-content-mobile .bd-text {
+  font-size: max(1.5vw, 12px);
+  align-self: flex-start;
+}
+
+.bd-content-mobile .bd-title {
+  font-size: max(2vw, 18px);
+}
+
+//de 300 a 400 no se ve bien
+
+@media (min-width: 300px) {
+  .bd-content-mobile .bd-text {
+    font-size: max(2.5vw, 12px);
+    width: 100%;
+  }
+
+  .bd-content-mobile .bd-title {
+    font-size: max(3.8vw, 18px);
+  }
+
+  .bd-content-mobile .poster-img {
+    height: max(90px, 50vw);
+  }
+}
+
+@media (max-width: 300px) {
+  .bd-content-mobile {
+    flex-direction: column;
+    position: relative;
+    height: max-content;
+    padding-bottom: 25px;
+  }
+
+  .bd-content-mobile .bd-text {
+    width: 100%;
+  }
+  
+  .bd-content-mobile .poster-img {
+    height: auto;
+    margin-bottom: 10px;
+  }
+}
+
+
 .bd-subtitle {
   font-style: italic;
 }
 
-@media (max-width: 280px) {
-  .bd-text {
+@media (max-width: 800px) {
+  .bd-content {
+    display: none;
+  }
+}
+
+@media (min-width: 800px) {
+  .bd-content-mobile {
     display: none;
   }
 }
@@ -221,44 +299,46 @@ ion-button {
 }
 
 .card-rating {
+  position: relative;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 
   background-color: g.$bg-title;
-  padding: 3vw 5vw;
+  padding: max(3vw, 15px) max(5vw, 30px);
 
-  border-radius: 2vw;
+  border-radius: max(2vw, 15px);
   width: 100%;
   height: min-content;
 }
 
-.card-rating .left-col {
+.card-rating .container-rating {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-right: 3vw;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+  margin-top: max(2vw, 10px);
 }
 
-.card-rating .left-col .rating {
+.card-rating .container-rating .rating {
   display: flex;
   flex-direction: row;
   justify-content: center;
   color: g.$details-color;
 }
 
-.card-rating .left-col .rating > * {
+.card-rating .container-rating .rating > * {
   margin: auto 1.5vw;
 }
 
-.card-rating .left-col .rating ion-icon {
-  font-size: 5vw;
+.card-rating .container-rating .rating ion-icon {
+  font-size: max(5vw, 30px);
   margin-bottom: 1vw;
 }
 
-.card-rating .left-col .rating p {
-  font-size: min(2.5vw, 30px);
+.card-rating .container-rating .rating p {
+  font-size: max(2.5vw, 15px);
   font-weight: bold;
   font-family: g.$font;
 }
@@ -266,7 +346,7 @@ ion-button {
 .card-rating .overview {
   font-family: g.$font;
   text-align: justify;
-  font-size: min(2vw, 20px);
+  font-size: max(min(2vw, 22px), 12px);
   color: g.$text-color;
 }
 

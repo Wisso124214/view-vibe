@@ -2,12 +2,12 @@
 
   <h1 style="padding-left: 25px; font-weight: bold;"> {{title}} </h1>
   <swiper-container
-  #swiper
-  style="height: 100%;"
-  [options]="slideOpts"
-  [navigation]="true"
-  (swiper)="swiperReady()"
-  (slidechange)="swiperSlideChanged($event)"
+    #swiper
+    style="height: 100%;"
+    [options]="slideOpts"
+    [navigation]="true"
+    (swiper)="swiperReady()"
+    (slidechange)="swiperSlideChanged($event)"
   >
     <swiper-slide  style="height: auto;" *ngFor="let total of totalSlides; let i = index" style="display: flex; flex-direction: row;">
       <ion-row>
