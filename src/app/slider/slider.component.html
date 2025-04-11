@@ -1,0 +1,39 @@
+<div class="slider" style="margin-top: 10px; margin-bottom: 10px;">
+  <h1 style="padding-left: 25px; font-weight: bold;" *ngIf="title"> {{title}} </h1>
+
+   <div *ngIf="segmentList.length === 0" class="div-loading-container">
+    <div class="loading-container-relative">
+      <ng-container  *ngTemplateOutlet="loading"></ng-container>
+    </div>
+   </div>
+
+  <swiper-container
+    #swiper
+    style="height: 100%;"
+    [options]="slideOpts"
+    [navigation]="true"
+    (swiperslidechange)="swiperSlideChanged($event)"
+    (swiperreachend)="swiperReachEnd($event)"
+  >
+  
+  <swiper-slide style="height: auto;" *ngFor="let total of totalSlides; let i = index" style="display: flex; flex-direction: row;">
+    <ion-row>
+      <div *ngIf="isLoading">
+        <div class="loading-container">
+          <ng-container  *ngTemplateOutlet="loading"></ng-container>
+        </div>
+      </div>    
+
+      <ion-col style="padding: 0;" *ngFor="let item of selectedSegment; let j = index">
+          <app-card-cover *ngIf="type === 'cover'" [item]="segmentList[i*slideOpts.slidesPerView + j]"/>
+          <app-card-cast *ngIf="type === 'cast'" [item]="segmentList[i*slideOpts.slidesPerView + j]"/>
+        </ion-col>
+      </ion-row>
+    </swiper-slide>
+  </swiper-container>
+</div>
+
+<ng-template #loading>
+  <ion-spinner name="bubbles" class="spinner"></ion-spinner>
+</ng-template>
+  

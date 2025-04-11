@@ -21,40 +21,126 @@
     more info
   
   -->
-  
-  <ion-content *ngIf="media" [fullscreen]="true">
-    <div class="content">
-  
+
+  <ion-content [fullscreen]="true">
+    <div *ngIf="isLoading" class="loading-container">
+      <ion-spinner name="bubbles"></ion-spinner>
+    </div>
+    <div *ngIf="hasError" class="error-container">
+      <p>Error al cargar los datos. Por favor, inténtalo de nuevo.</p>
+      <ion-button (click)="retryFetch()">Reintentar</ion-button>
+    </div>
+    <div *ngIf="!isLoading && !hasError && media" class="content">
       <div class="backdrop">
-        <img class="bd-img" [src]="pathImgOriginal + media.backdrop_path" />
+        <img
+          *ngIf="media.backdrop_image; else no_image_backdrop"
+          class="bd-img"
+          [src]="media.backdrop_image"
+        />
+        <ng-template #no_image_backdrop>
+          <img
+            class="bd-no-img"
+            [src]="'https://t4.ftcdn.net/jpg/03/13/81/83/360_F_313818309_sI2LhUeMYPtLzskyGcfWsHpvHxSjBtlt.jpg'"
+          />
+        </ng-template>
+
         <div class="bd-content">
-          <img class="poster-img" [src]="pathImg500 + media.poster_path" />
+          <img
+            *ngIf="media.cover_image; else no_image_poster"
+            class="poster-img"
+            [src]="media.cover_image"
+          />
+
+          <ng-template #no_image_poster>
+            <img
+              #noImage
+              class="poster-img no-image-poster"
+              [src]="'https://static-00.iconduck.com/assets.00/no-image-icon-512x512-lfoanl0w.png'"
+            />
+          </ng-template>
+
           <div class="bd-text">
             <p class="bd-title">{{media.title}}</p>
             <p class="bd-subtitle">{{media.original_title}}</p>
-            <div class="bd-runtime"><p *ngIf="runtimeHours > 0">{{runtimeHours}}h &nbsp;</p><p *ngIf="runtimeMinutes > 9">{{runtimeMinutes}}m</p><p *ngIf="runtimeMinutes < 10 && runtimeMinutes > 0">0{{runtimeMinutes}}m</p></div>
+            <p class="bd-date" *ngIf="releaseDate">{{releaseDate}}</p>
+            <div class="bd-runtime">
+              <p *ngIf="runtimeHours > 0">{{runtimeHours}}h &nbsp;</p>
+              <p *ngIf="runtimeMinutes > 9">{{runtimeMinutes}}m</p>
+              <p *ngIf="runtimeMinutes < 10 && runtimeMinutes > 0">
+                0{{runtimeMinutes}}m
+              </p>
+            </div>
             <div class="bd-flex-genres">
-              <div class="bd-flex-genre" *ngFor="let genre of media.genres; let g = index"><p class="bd-genre">{{genre.name}}</p><p class="bd-genre-comma" *ngIf="g < media.genres.length - 1">,</p></div>
+              <div
+                class="bd-flex-genre"
+                *ngFor="let genre of genres; let g = index"
+              >
+                <p class="bd-genre">{{genre.title}}</p>
+                <p
+                  class="bd-genre bd-genre-comma"
+                  *ngIf="g < media.genres.length - 1"
+                >
+                  ,
+                </p>
+              </div>
             </div>
           </div>
         </div>
 
-        <ion-button class="buy-button" fill="clear" (click)="openHomepage(media.homepage)">
+        <ion-button
+          *ngIf="media.homepage"
+          class="buy-button"
+          fill="clear"
+          (click)="openHomepage(media.homepage)"
+        >
           <ion-icon name="ticket"></ion-icon>
-          <div class="text"><p class="buy">Buy</p><p class="tickets">&nbsp;Tickets</p></div>
+          <div class="text">
+            <p class="buy">Buy</p>
+            <p class="tickets">&nbsp;Tickets</p>
+          </div>
         </ion-button>
       </div>
-      
+
       <div class="details">
         <div class="content-right">
           <div class="bd-content-mobile">
-            <img class="poster-img" [src]="pathImg500 + media.poster_path" />
+            <img
+              *ngIf="media.cover_image; else noimage"
+              class="poster-img"
+              [src]="media.cover_image"
+            />
+
+            <ng-template #noimage>
+              <img
+                class="poster-img no-image"
+                [src]="'https://static-00.iconduck.com/assets.00/no-image-icon-512x512-lfoanl0w.png'"
+              />
+            </ng-template>
+
             <div class="bd-text">
               <p class="bd-title">{{media.title}}</p>
               <p class="bd-subtitle">{{media.original_title}}</p>
-              <div class="bd-runtime"><p *ngIf="runtimeHours > 0">{{runtimeHours}}h &nbsp;</p><p *ngIf="runtimeMinutes > 9">{{runtimeMinutes}}m</p><p *ngIf="runtimeMinutes < 10 && runtimeMinutes > 0">0{{runtimeMinutes}}m</p></div>
+              <p class="bd-date" *ngIf="releaseDate">{{releaseDate}}</p>
+              <div class="bd-runtime">
+                <p *ngIf="runtimeHours > 0">{{runtimeHours}}h &nbsp;</p>
+                <p *ngIf="runtimeMinutes > 9">{{runtimeMinutes}}m</p>
+                <p *ngIf="runtimeMinutes < 10 && runtimeMinutes > 0">
+                  0{{runtimeMinutes}}m
+                </p>
+              </div>
               <div class="bd-flex-genres">
-                <div class="bd-flex-genre" *ngFor="let genre of media.genres; let g = index"><p class="bd-genre">{{genre.name}}</p><p class="bd-genre-comma" *ngIf="g < media.genres.length - 1">,</p></div>
+                <div
+                  class="bd-flex-genre"
+                  *ngFor="let genre of genres; let g = index"
+                >
+                  <p class="bd-genre">{{genre.title}}</p>
+                  <p
+                    class="bd-genre bd-genre-comma"
+                    *ngIf="g < media.genres.length - 1"
+                  >
+                    ,
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -63,40 +149,57 @@
             <div class="container-rating">
               <div class="rating">
                 <ion-icon name="star"></ion-icon>
-                <p class="rating-number">{{media.vote_average | number:'1.1-1'}}</p>
+                <p
+                  *ngIf="media.rating_critics > 0; else rating_null"
+                  class="rating-number"
+                >
+                  {{media.rating_critics | number:'1.1-1'}}
+                </p>
               </div>
               <div class="rating">
                 <ion-icon name="star-outline"></ion-icon>
-                <p class="rating-number">{{media.vote_average | number:'1.1-1'}}</p>
+                <p
+                  *ngIf="media.rating_users > 0; else rating_null"
+                  class="rating-number"
+                >
+                  {{media.rating_users | number:'1.1-1'}}
+                </p>
               </div>
+
+              <ng-template #rating_null>
+                <p class="rating-number">- -</p>
+              </ng-template>
             </div>
-            
+
             <div class="overview">
               <p class="overview-text">{{media.overview}}</p>
             </div>
           </div>
 
           <div class="cast">
-            <p class="title">Cast</p>
-            <div class="flex-cast">
-              <div class="card-cast"></div>
-              <div class="card-cast"></div>
-              <div class="card-cast"></div>
-              <div class="card-cast"></div>
-              <div class="card-cast"></div>
-              <div class="card-cast"></div>
-              <div class="card-cast"></div>
-              <div class="card-cast"></div>
-              <div class="card-cast"></div>
-            </div>
+            <app-slider
+              [title]="'Cast and Crew'"
+              [route]="'/details-media/' + id"
+              [is_paginated]="false"
+              [type]="'cast'"
+              [data]="cast"
+              [desired_width_px]="150"
+              [exceptions_width]="[
+                {
+                  max_width: 300,
+                  slides: 1,
+                },
+              ]"
+            ></app-slider>
           </div>
-
-  
+          <app-slider-comments
+            [title]="'Comments'"
+            [data]="comments"
+            [id_movie]="media._id"
+          ></app-slider-comments>
         </div>
         <div class="sidebar-left"></div>
       </div>
-      
     </div>
-  </ion-content>  
+  </ion-content>
 </div>
-  

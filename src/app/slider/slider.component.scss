@@ -1,0 +1,50 @@
+@use "src/global.scss" as g;
+@use "sass:color";
+
+$spinner-size: 50px;
+
+h1 {
+  color: g.$text-color;
+
+  background-color: g.$bg-title;
+  padding: 12px;
+  margin-bottom: 5px;
+  margin-top: 30px;
+  border-top: 4px solid g.$details-color;
+  border-bottom: 4px solid g.$details-color;
+}
+
+swiper-container {
+  --swiper-navigation-color: #{g.$bg-color};
+  --swiper-navigation-size: 40px;
+  --swiper-navigation-sides-offset: 25px;
+  --swiper-navigation-top-offset: 50%;
+}
+
+.loading-container, .loading-container-relative {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: g.$no-bg-title;
+  z-index: 1;
+  padding: calc($spinner-size/3);
+}
+
+.loading-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.loading-container-relative {
+  position: absolute;
+  width: calc($spinner-size * 2.5);
+  height: calc($spinner-size * 2.5);
+  border-radius: 200px;
+}
+
+.spinner {
+  color: g.$bg-card;
+  width: $spinner-size;
+  height: $spinner-size;
+}

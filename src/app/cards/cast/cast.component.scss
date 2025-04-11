@@ -1,23 +1,44 @@
-@use 'src/global.scss' as g;
-@use 'sass:color';
+@use "src/global.scss" as g;
+@use "sass:color";
 
 $text-color-tertiary: null;
 $box-shadow-color: null;
+$invert-poster: null;
 
 @if g.$dark-theme {
   $text-color-tertiary: color.adjust(g.$text-color-secondary, $lightness: 12%);
   $box-shadow-color: color.adjust(g.$bg-color, $lightness: -100%);
+  $invert-poster: 0;
 } @else {
   $text-color-tertiary: color.adjust(g.$text-color-secondary, $lightness: -12%);
   $box-shadow-color: color.adjust(g.$bg-color, $lightness: -100%);
+  $invert-poster: 1;
 }
 
-.image-cover-card {
+.age {
+  position: absolute;
+  z-index: 1;
+  background-color: g.$details-color;
+  padding: 4px 8px;
+  right: 14px;
+  top: 14px;
+  border-radius: 10px;
+  color: g.$no-text-color;
+
+  font-weight: bold;
+}
+
+.image-slide-card {
   padding: 5px;
   border-radius: 20px;
 }
 
-.content-cover-card {
+.no-image {
+  object-fit: cover;
+  filter: invert($invert-poster);
+}
+
+.content-slide-card {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -41,33 +62,14 @@ $box-shadow-color: null;
   left: 20px;
 }
 
-h1 {
-  color: g.$text-color;
-  font-family: g.$font;
-  background-color: g.$bg-title;
-  padding: 12px;
-  margin-bottom: 5px;
-  margin-top: 30px;
-  border-top: 4px solid g.$details-color;
-  border-bottom: 4px solid g.$details-color;
-}
-
 ion-card {
   box-shadow: 1px 1px 15px $box-shadow-color;
   border-radius: 20px;
   background-color: g.$bg-card-image;
 }
 
-swiper-container {
-  --swiper-navigation-color: #{g.$bg-color};
-  --swiper-navigation-size: 40px;
-  --swiper-navigation-sides-offset: 25px;
-  --swiper-navigation-top-offset: 50%;
-}
-
 .small-text {
   color: g.$text-color-secondary;
-  font-family: g.$font;
 }
 
 .subtitle {
@@ -76,8 +78,7 @@ swiper-container {
 }
 
 .title {
-  font-size: larger;
+  font-size: large;
   font-weight: bold;
   color: g.$text-color;
-  font-family: g.$font;
 }

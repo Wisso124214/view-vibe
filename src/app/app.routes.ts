@@ -13,8 +13,4 @@ export const routes: Routes = [
     redirectTo: 'tabs/movies',
     pathMatch: 'full',
   },
-  {
-    path: 'backend-data',
-    loadComponent: () => import('./backend-data/backend-data.page').then( m => m.BackendDataPage)
-  },
 ];

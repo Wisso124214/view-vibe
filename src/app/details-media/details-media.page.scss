@@ -2,6 +2,14 @@
 @use 'sass:color';
 
 $blur: 5px;
+$invert-bd: 1;
+$invert-poster: 0;
+
+@if g.$dark-theme {
+  $invert-bd: 0;
+  $invert-poster: 1;
+}
+  
 
 .ion-page {
   width: 100%;
@@ -25,7 +33,7 @@ ion-content {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: min(1200px, 100%);
+  width: min(1100px, 100vw);
   justify-self: center;
   background-color: g.$no-bg-title;
   padding-bottom: 10%;
@@ -78,7 +86,7 @@ ion-content {
   background-color: g.$details-color;
   border-radius: max(3vw, 30px);
   padding: 0 max(1vw, 6px);
-  font-family: g.$font;
+  
   font-size: max(1vw, 10px);
   border: max(.4vw, 4px) solid g.$bg-title;
   color: g.$no-text-color;
@@ -104,13 +112,23 @@ ion-content {
 .backdrop {
   position: relative;
   top: 0;
-  width: 100%;
-  height: min-content;
+  // height: min-content;
+  width: min(1100px, 100vw);
+  height: min(618px, 57vw);
+  backdrop-filter: none;
 }
 
 .bd-img {
   width: 100%;
   // border-radius: 30px;
+}
+
+.bd-no-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: invert($invert-bd);
+
 }
 
 .bd-content, .bd-content-mobile {
@@ -127,6 +145,7 @@ ion-content {
   position: relative;
   top: 0;
   left: 0;
+  height: min-content;
 }
 
 .poster-img {
@@ -135,11 +154,12 @@ ion-content {
   border: max(.4vw, 4px) solid g.$bg-title;
   backdrop-filter: blur($blur);
   border-radius: max(2vw, 15px);
+  object-fit: cover;
 }
 
 .bd-content-mobile .poster-img {
   border: max(.5vw, 5px) solid g.$bg-title;
-  width: 100%;
+  object-fit: contain;
 }
 
 .bd-runtime {
@@ -162,9 +182,13 @@ ion-content {
   color: g.$text-color;
   font-size: max(min(1.5vw, 18px), 10px);
   align-self: flex-end;
-  font-family: g.$font;
+  
   backdrop-filter: blur($blur);
   max-width: 550px;
+}
+
+.bd-genre {
+  font-size: max(min(1.75vw, 20px), 12px);
 }
 
 .bd-content-mobile .bd-text {
@@ -176,7 +200,33 @@ ion-content {
   font-size: max(2vw, 18px);
 }
 
-//de 300 a 400 no se ve bien
+.bd-content-mobile .bd-genre {
+  font-size: max(1.75vw, 14px);
+}
+
+.no-image {
+  background-color: g.$bg-title;
+  padding: 6vw;
+  backdrop-filter: blur($blur);
+  width: 25vw;
+  height: 25vw;
+}
+
+.no-image-poster {
+  background-color: g.$bg-title;
+  padding: 4vw;
+  backdrop-filter: blur($blur);
+  height: 80%;
+  align-self: flex-end;
+  filter: invert($invert-poster);
+}
+
+.no-image-backdrop {
+  width: min(1100px, 100vw);
+  height: min(618px, 56vw);
+  backdrop-filter: blur($blur);
+}
+
 
 @media (min-width: 300px) {
   .bd-content-mobile .bd-text {
@@ -206,13 +256,25 @@ ion-content {
   }
   
   .bd-content-mobile .poster-img {
-    height: auto;
+    width: 100%;
     margin-bottom: 10px;
+  }
+
+  .no-image {
+    padding: 3vw;
   }
 }
 
 
 .bd-subtitle {
+  font-style: italic;
+  font-weight: bold;
+}
+
+.bd-date {
+  font-weight: bold;
+  margin: 0;
+  letter-spacing: .5px;
   font-style: italic;
 }
 
@@ -255,48 +317,13 @@ ion-content {
 }
 
 .bd-title {
-  font-size: max(2vw, 12px);
+  font-size: max(2.25vw, 14px);
   top: 0;
   margin: 0;
   font-weight: bold;
 }
 
-.button-back {
-  position: absolute;
-  display: flex;
-  top: 20px;
-  left: 20px;
-  z-index: 100;
-  background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 100%;
-  padding: 5px;
-  width: 50px;
-  height: 50px;
-  justify-content: center;
-  align-items: center;
-}
 
-.button-back ion-icon {
-  color: white;
-  font-size: 25px;
-}
-
-.button-back:hover {
-  background-color: rgba(0, 0, 0, 0.7);
-}
-
-.button-back:active {
-  background-color: rgba(0, 0, 0, 0);
-}
-
-ion-button {
-  --background: g.$details-color;
-  --color: white;
-  --border-radius: 20px;
-  --box-shadow: 1px 1px 15px $box-shadow-color;
-  --width: 50px;
-  --height: 50px;
-}
 
 .card-rating {
   position: relative;
@@ -340,11 +367,11 @@ ion-button {
 .card-rating .container-rating .rating p {
   font-size: max(2.5vw, 15px);
   font-weight: bold;
-  font-family: g.$font;
+  
 }
 
 .card-rating .overview {
-  font-family: g.$font;
+  
   text-align: justify;
   font-size: max(min(2vw, 22px), 12px);
   color: g.$text-color;
@@ -355,7 +382,7 @@ ion-button {
   font-size: max(2vw, 12px);
   font-weight: bold;
   margin: 0;
-  font-family: g.$font;
+  
 }
 
 .flex-cast {

@@ -1,0 +1,65 @@
+<div class="slider" style="margin-top: 10px; margin-bottom: 10px;">
+
+  <h1 style="padding-left: 25px; font-weight: bold;"> {{title}} </h1>
+  <swiper-container
+    #swiper
+    style="height: 100%;"
+    [options]="slideOpts"
+    [navigation]="true"
+    (swiperslidechange)="swiperSlideChanged($event)"
+    (swiperreachend)="swiperReachEnd($event)"
+  >
+    <swiper-slide style="height: auto;" *ngFor="let total of totalSlides; let i = index" style="display: flex; flex-direction: row;">
+      <ion-row>
+
+        <div *ngIf="isLoading" class="loading-container">
+          <ion-spinner name="bubbles"></ion-spinner>
+        </div>
+
+        <ion-col style="padding: 0;" *ngFor="let item of selectedSegment; let j = index">
+          <ion-card 
+            class="cover-card"
+            style="width: 90%;"
+            (click)="type === 'cover' ? openDetails(segmentList[i*slideOpts.slidesPerView + j]._id) : ''"
+            *ngIf="segmentList[i*slideOpts.slidesPerView + j]"
+          >
+            <!-- <div *ngIf="(i+1)*slideOpts.slidesPerView >= segmentList.length">
+              <div *[ngOnInit]="test(i)"></div>
+            </div> -->
+
+            <div *ngIf="type === 'cast'; else coverimage">
+              <img *ngIf="!(segmentList[i*slideOpts.slidesPerView + j].image.includes('null')); else coverimage" loading="eager" class="image-cover-card" [src]="segmentList[i*slideOpts.slidesPerView + j].image" />
+            </div>
+
+            <ng-template #coverimage>
+            <img *ngIf="segmentList[i*slideOpts.slidesPerView + j].cover_image; else noimage" loading="eager" class="image-cover-card" [src]="segmentList[i*slideOpts.slidesPerView + j].cover_image" />
+            </ng-template>
+            <ng-template #noimage>
+              <!-- <img loading="eager" class="image-cover-card" [src]="'https://static-00.iconduck.com/assets.00/no-image-icon-512x512-lfoanl0w.png'" /> -->
+              <img loading="eager" class="image-cover-card no-image" [src]="'https://www.shutterstock.com/shutterstock/photos/640041949/display_1500/stock-vector-missing-image-vector-illustration-no-image-available-vector-concept-vector-watermark-640041949.jpg'" />
+            </ng-template>
+
+            <ion-card-content class="content-cover-card">
+              <p class="title"> {{(type === 'cast' ? segmentList[i*slideOpts.slidesPerView + j].name : segmentList[i*slideOpts.slidesPerView + j].title)}} </p>
+              
+              <p class="small-text" style="font-weight: bold;" *ngIf="type === 'cast'">{{segmentList[i*slideOpts.slidesPerView + j].job}}</p>
+              <p class="small-text" *ngIf="segmentList[i*slideOpts.slidesPerView + j].department && type === 'cast'">{{segmentList[i*slideOpts.slidesPerView + j].department}}</p>
+              <p class="small-text" *ngIf="segmentList[i*slideOpts.slidesPerView + j].character && type === 'cast'">{{segmentList[i*slideOpts.slidesPerView + j].character}}</p>
+              
+              <div  *ngIf="type === 'cover'" class="rating">
+                <p *ngIf="segmentList[i*slideOpts.slidesPerView + j].rating_critics > 0; else rating_null" class="small-text">★ {{segmentList[i*slideOpts.slidesPerView + j].rating_critics | number:'1.1-1'}}</p>
+                <p *ngIf="segmentList[i*slideOpts.slidesPerView + j].rating_users > 0; else rating_null" class="small-text">✰ {{segmentList[i*slideOpts.slidesPerView + j].rating_users | number:'1.1-1'}}</p>
+
+                <ng-template #rating_null>
+                  <p class="small-text">★ - -</p>
+                </ng-template>
+              </div>
+
+              <p class="year-card small-text" *ngIf="segmentList[i*slideOpts.slidesPerView + j].release_date">{{segmentList[i*slideOpts.slidesPerView + j].release_date.split('-')[0]}}</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </swiper-slide>
+  </swiper-container>
+</div>

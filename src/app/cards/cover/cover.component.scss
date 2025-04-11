@@ -1,0 +1,84 @@
+@use "src/global.scss" as g;
+@use "sass:color";
+
+$text-color-tertiary: null;
+$box-shadow-color: null;
+$invert-poster: null;
+
+@if g.$dark-theme {
+  $text-color-tertiary: color.adjust(g.$text-color-secondary, $lightness: 12%);
+  $box-shadow-color: color.adjust(g.$bg-color, $lightness: -100%);
+  $invert-poster: 0;
+} @else {
+  $text-color-tertiary: color.adjust(g.$text-color-secondary, $lightness: -12%);
+  $box-shadow-color: color.adjust(g.$bg-color, $lightness: -100%);
+  $invert-poster: 1;
+}
+
+.age {
+  position: absolute;
+  z-index: 1;
+  background-color: g.$details-color;
+  padding: 4px 8px;
+  right: 14px;
+  top: 14px;
+  border-radius: 10px;
+  color: g.$no-text-color;
+
+  font-weight: bold;
+}
+
+.image-slide-card {
+  padding: 5px;
+  border-radius: 20px;
+}
+
+.no-image {
+  object-fit: cover;
+  filter: invert($invert-poster);
+}
+
+.content-slide-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 20px;
+  background-color: g.$bg-card;
+  padding-bottom: 30px;
+}
+
+.rating {
+  display: flex;
+  align-self: center;
+  flex-direction: row;
+  padding-top: 10px;
+  justify-content: space-between;
+  width: 85%;
+}
+
+.year-card {
+  position: absolute;
+  bottom: 10px;
+  left: 20px;
+}
+
+ion-card {
+  box-shadow: 1px 1px 15px $box-shadow-color;
+  border-radius: 20px;
+  background-color: g.$bg-card-image;
+}
+
+.small-text {
+  color: g.$text-color-secondary;
+}
+
+.subtitle {
+  font-size: small;
+  color: $text-color-tertiary;
+}
+
+.title {
+  font-size: large;
+  font-weight: bold;
+  color: g.$text-color;
+}

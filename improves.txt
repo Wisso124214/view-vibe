@@ -1,10 +1,33 @@
 
-  cover-slider.component:
-    - Set ★✰ as icons and a little bit larger (with percent and min px)
-    - Set --swiper-navigation-top-offset to image height on .ts
-    - Customize arrows cover-slider
-    - Disengage slider (swiper) on cover, pass the child node (to use it as cast, cover, comment, review...)
 
+  - Change icons
+  - Add ages to media
+  - Add comments component
+
+  - Search how toggle mode theme
+
+ ✔ Add cast component (fix height)
+ ✔ Cover slider loading (missing lock when isLoading)
+✔✔ Age app-slider
+✔✔ Fix the router error (changing route)
+✔✔ Change the url fetch on front end (pass _id to get details)
+✔✔ Set default backdrop image when does not load (set an default height)
+✔✔ Invert colors no images
+
+
+  slider.component:
+
+      - Set ★✰ as icons and a little bit larger (with percent and min px)
+      - Set --swiper-navigation-top-offset to image height on .ts
+    ✔✔ Fix fetch error to next movies
+    ✔✔ Customize arrows slider
+
+  - Set bd-text background and text to opposite color, when backdrop_path is null, to contrasting
+  - Disable bar scroll on mobile views
+  - Finish to edit background pattern0
+  - Overview collapse first 5 lines (show more with an down arrow)
+
+✔✔ Autofocus popup add comment
 ✔✔ Fix background of app (set on the correct place to configure it once and it show in entire pages app)
 ✔✔ Fix font size mobile
 ✔✔ bd-content responsive

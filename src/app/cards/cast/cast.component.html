@@ -1,0 +1,36 @@
+<ion-card
+  class="slide-card"
+  style="width: 90%"
+  *ngIf="item"
+>
+  <div class="img-slide-card-container">
+    <img
+      *ngIf="!item.image.includes('null'); else noimage"
+      loading="eager"
+      class="image-slide-card"
+      [src]="item.image"
+    />
+
+    <ng-template #noimage>
+      <img
+        loading="eager"
+        class="image-slide-card no-image"
+        [src]="'https://www.shutterstock.com/shutterstock/photos/640041949/display_1500/stock-vector-missing-image-vector-illustration-no-image-available-vector-concept-vector-watermark-640041949.jpg'"
+      />
+    </ng-template>
+  </div>
+
+  <ion-card-content class="content-slide-card">
+    <p class="title">{{ item.name }}</p>
+
+    <p class="small-text" *ngIf="item.department">
+      {{ item.department }}
+    </p>
+    <p class="small-text" *ngIf="item.character">
+      {{ item.character }}
+    </p>
+    <p class="small-text" style="font-weight: bold">
+      {{ item.job }}
+    </p>
+  </ion-card-content>
+</ion-card>

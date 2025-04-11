@@ -1,9 +1,9 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
-import { CoverSliderComponent } from '../cover-slider/cover-slider.component';
+import { SliderComponent } from '../slider/slider.component';
 
-import { fetchData1, fetchData2, fetchData3 } from '../../utils/FetchData';
+import { url_api } from '../../utils/FetchData';
 
 @Component({
   selector: 'app-tab1',
@@ -16,15 +16,13 @@ import { fetchData1, fetchData2, fetchData3 } from '../../utils/FetchData';
     IonTitle,
     IonContent,
     CommonModule,
-    CoverSliderComponent,
+    SliderComponent,
   ],
 })
 export class Tab1Page implements OnInit {
 
   constructor() {}
-  dataCoverSlider1: any = fetchData1.results;
-  dataCoverSlider2: any = fetchData2.results;
-  dataCoverSlider3: any = fetchData3.results;
+  url_api: any = url_api;
 
   ngOnInit() {}
 }

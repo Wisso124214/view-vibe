@@ -106,6 +106,10 @@ $font: 'Outfit', 'Montserrat', 'Verdana';
   $no-text-color: color.adjust($text-color, $lightness: 100%);
 }
 
+* {
+  font-family: $font;
+}
+
 
 .ion-page {
   background: $bg-url center/cover;
@@ -119,4 +123,42 @@ ion-content {
   --background: transparent;
   backdrop-filter: blur(1.5px);
   z-index: 0;
+}
+
+
+.button-back {
+  position: absolute;
+  display: flex;
+  top: 20px;
+  left: 20px;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 100%;
+  padding: 5px;
+  width: 50px;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-back ion-icon {
+  color: white;
+  font-size: 25px;
+}
+
+.button-back:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.button-back:active {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+ion-button {
+  --background: g.$details-color;
+  --color: white;
+  --border-radius: 20px;
+  --box-shadow: 1px 1px 15px $box-shadow-color;
+  --width: 50px;
+  --height: 50px;
 }

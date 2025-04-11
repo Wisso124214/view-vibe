@@ -1,0 +1,84 @@
+<div class="slider" style="margin-top: 10px; margin-bottom: 10px;">
+  <div class="header-slider">
+    <h1 class="header-title"> {{title}} </h1>
+    <ion-icon class="plus-icon" name="add-circle" size="large" (click)="handleAddComment()"></ion-icon>
+  </div>
+
+  <!-- Popup for adding a comment -->
+  <div class="popup" *ngIf="showPopup">
+    <div class="popup-content">
+      <textarea #textarea maxlength="maxLengthComment" [(ngModel)]="newComment" placeholder="Write your comment here..." (input)="lengthComment = textarea.value.length"></textarea>
+      <p class="character-count">{{ lengthComment }}/{{ maxLengthComment }}</p>
+      <div class="popup-buttons">
+        <button class="cancel-button" (click)="cancelComment()">Cancel</button>
+        <button class="done-button" (click)="addComment()">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="comment-container">
+    <div *ngIf="isLoading" class="loading-container">
+      <ion-spinner name="bubbles"></ion-spinner>
+    </div>
+
+    <div *ngIf="data.length === 0">
+      <p class="no-comments">No comments</p>
+    </div>
+
+    <div class="slide-card-container" *ngFor="let comment of data; let j = index">
+      <ion-card 
+        class="slide-card"
+        *ngIf="comment"
+      >
+        <div class="header">
+          <img *ngIf="comment.avatar_image; else noimage" loading="eager" class="avatar-image-card" [src]="comment.cover_image" />
+          <div class="header-text">
+            <p class="card-title" *ngIf="comment.username"> {{comment.username}} </p>
+            <p class="date" *ngIf="comment.publish_date"> {{ comment.publish_date | date: 'dd/MM/yyyy' }} </p>
+          </div>
+          
+          <ng-template #noimage>
+            <img loading="eager" class="avatar-image-card no-image" [src]="'https://www.pngfind.com/pngs/m/381-3819326_default-avatar-svg-png-icon-free-download-avatar.png'" />
+          </ng-template>
+        </div>
+
+        <ion-card-content class="content-slide-card" (click)="handleCommentClick(comment, $event.target)">
+          
+          <p class="small-text cropped-text" *ngIf="comment.content && comment.content.length > charactersCroppedText && !comment.isCropped; else checkIsNotCropped" [innerHTML]="(comment.content.slice(0, charactersCroppedText) + '...')"></p>
+
+          <div class="comment-icons-left">
+              <p class="num-likes" *ngIf="comment.users_liked"> {{ comment.users_liked.length }} </p>
+              <ion-icon class="comment-icon" name="star" *ngIf="comment.users_liked.includes(username); else noFavorite" (click)="toggleCommentFavorite(comment)"></ion-icon>
+
+              <ng-template #noFavorite>
+                <ion-icon class="comment-icon" name="star-outline" (click)="toggleCommentFavorite(comment)"></ion-icon>
+              </ng-template>
+
+            <ion-icon class="comment-icon" name="arrow-undo"></ion-icon>
+          </div>
+
+          <div *ngIf="comment.username === username">
+            <div class="bottom-div-user"></div>
+            <ng-container *ngTemplateOutlet="commentIcons"></ng-container>
+          </div>
+          
+          <ng-template #checkIsNotCropped>
+            <p class="small-text" *ngIf="comment.content && comment.content.length > charactersCroppedText && comment.isCropped; else allText" style="cursor: pointer;" [innerHTML]="comment.content"></p>
+          </ng-template>
+
+          <ng-template #allText>
+            <p class="small-text" *ngIf="comment.content" [innerHTML]="comment.content"></p>
+          </ng-template>
+          
+          <ng-template #commentIcons>
+            <div class="comment-icons">
+              <ion-icon class="comment-icon" name="pencil" (click)="handleEditComment(comment)"></ion-icon>
+              <ion-icon class="comment-icon" name="trash" (click)="handleDeleteComment(comment)"></ion-icon>
+            </div>
+          </ng-template>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+  </div>
+</div>
