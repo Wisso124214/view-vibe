@@ -11,9 +11,17 @@
     </div>
     
     <div class="content" *ngIf="!isLoading && data">
-      <div #grid_cards *ngFor="let item of data">
-        <app-card-cover [item]="item" />
-      </div>
+      <ion-grid #grid_cards>
+        <ion-row *ngFor="let row of totalRows; let i = index">
+          <ion-col *ngFor="let col of cardsRows; let j = index">
+            <app-card-cover
+              [item]="data[i*cardsPerRow + j]"
+              [desired_width_px]="230"
+              />
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      
     </div>
   </ion-content>
 </div>
